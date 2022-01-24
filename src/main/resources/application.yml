@@ -1,0 +1,59 @@
+server:
+  port: 8066
+logging:
+  level:
+    org.hibernate: warn
+    org.springframework: error
+    com.shop.shopcommission: info
+spring:
+  data:
+    redis:
+      repositories:
+        enabled: false
+  profiles:
+    active: dev
+  datasource:
+    hikari:
+      auto-commit: true # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      maximum-pool-size: 15000 #最大连接数，小于等于0会被重置为默认值10；大于零小于1会被重置为minimum-idle的值
+      minimum-idle: 10  #最小空闲连接，默认值10，小于0或大于maximum-pool-size，都会重置为maximum-pool-size
+      idle-timeout: 180000  #空闲连接超时时间，默认值600000（10分钟），大于等于max-lifetime且max-lifetime>0，会被重置为0；不等于0且小于10秒，会被重置为10秒。
+      max-lifetime: 540000  #连接最大存活时间.不等于0且小于30秒，会被重置为默认值30分钟.设置应该比mysql设置的超时时间短
+      connection-timeout: 30000 # 数据库连接超时时间,默认30秒，即30000
+      connection-test-query: SELECT 1    #连接测试查询
+  mvc:
+    #出现错误时, 直接抛出异常
+    throw-exception-if-no-handler-found: true
+  messages:
+    use-code-as-default-message: true
+    cache-duration: 3600
+  task:
+    execution:
+      pool:
+        core-size: 10
+        max-size: 100
+        queue-capacity: 1000
+  quartz:
+    wait-for-jobs-to-complete-on-shutdown: true
+    overwrite-existing-jobs: true
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: scheduler
+            instanceId: AUTO
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+job:
+  commission_settlement: #将待结算变为佣金和余额
+mybatis-plus:
+  #如果不配置默认枚举类型处理类（default-enum-type-handler），则需要配置枚举扫描包，并且枚举类实现IEnum，在实现类里getValue指定需要转换的值
+  type-enums-package: com.heryoos.job.pojo
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: false
+    # 返回map时true:当查询数据为空时字段返回为null,false:不加这个查询数据为空时，字段将被隐藏
+    call-setters-on-nulls: true

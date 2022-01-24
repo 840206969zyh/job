@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #数据库公网
+    #url: jdbc:mysql://pc-bp150ylo614t6jkq7.rwlb.rds.aliyuncs.com:3306/shopxx_prod?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://heryoos.rwlb.rds.aliyuncs.com:3306/shopxx_prod?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    #测试数据库内网
+    #url: jdbc:mysql://rm-bp149fdjsn0shzhl2zo.mysql.rds.aliyuncs.com:3306/wanhe_dev?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    #压测数据库
+    #url: jdbc:mysql://heryoos.rwlb.rds.aliyuncs.com:3306/shopxx_wanhe?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: dizsoft
+    password: Zd1250f7
+    #password: DB_hylp_12345
